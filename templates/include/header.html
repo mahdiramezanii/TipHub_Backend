@@ -1,0 +1,213 @@
+{% load static %}
+
+<header class="position-relative">
+    <div class="main-header position-relative">
+
+        <div class="nav-header-box mob1 d-md-flex d-lg-flex align-items-center justify-content-between">
+
+            <div class="d-flex flex-column flex-md-row align-items-center pr-md-4">
+                <div class="logo d-flex justify-content-center align-items-center ml-3">
+                    <a href="{% url "Home:Home" %}"><img src="{% static "assets/image/logo.png" %}"
+                                                         class="logo-img img-fluid"
+                                                         alt=""/></a>
+                </div>
+                <form action="{% url "Home:search" %}" method="get">
+                    <div class="nav-search-btn">
+                        <input type="search" name="q" required placeholder="جستجو">
+
+                        <button type="submit"><i class="fa fa-search"></i></button>
+
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="d-block d-md-flex align-items-center pl-md-4">
+                {% if request.user.is_authenticated %}
+
+                    <div class="dropdown notification-box">
+                        <div class="position-relative d-none d-md-block " type="button" id="dropdownMenuButton"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static "assets/image/notification.png" %}" class="notification-img" alt="">
+                            <div class="badge">{{ request.user.notification.all.count }}</div>
+                        </div>
+
+                        {% if request.user.notification.all %}
+                            <div class="dropdown-menu notification-menu-items custom-bg"
+                                 aria-labelledby="dropdownMenuButton">
+                                {% for n in request.user.notification.all|slice:":5" %}
+                                    {% if n.is_active %}
+                                        <a class="border-bottom"
+                                           href="{{ n.get_absulot_url }}"> {{ n.body }}<strong>({{ n.sender.titel }})</strong></a>
+
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+
+                <div class="container">
+                    {% if request.user.is_authenticated %}
+                        <div class="dropdown notification-box">
+                            <div class="position-relative d-none d-md-block " type="button" id="dropdownMenuButton"
+                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{% static "assets/image/message.svg" %}" class="notification-img" alt="">
+                                <div class="badge">{{ request.user.Message.all.count }}</div>
+                            </div>
+
+                            {% if request.user.Message.all %}
+                                <div class="dropdown-menu notification-menu-items custom-bg"
+                                     aria-labelledby="dropdownMenuButton">
+
+
+                                    {% for n in request.user.Message.all %}
+                                        {% if n.is_active %}
+
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item">
+                                                <!-- Message Start -->
+                                                <div class="media">
+                                                    <img src="{{ n.sender.image.url }}"
+                                                         alt="User Avatar" width="60px" style="border-radius: 60px"
+                                                         class="img-size-10 img-circle ml-3">
+                                                    <div class="media-body">
+                                                        <h10 class="dropdown-item-title text-danger">
+                                                            {{ n.sender.full_name }}
+
+                                                        </h10>
+                                                        <p class="text-sm">{{ n.body }}</p>
+                                                        <p class="text-sm text-muted"><i
+                                                                class="fa fa-clock-o mr-1"></i>{{ n.to_jalali }}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Message End -->
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+
+
+                                        {% endif %}
+                                    {% endfor %}
+                                    <a href="#" class="dropdown-item dropdown-footer">مشاهده همه پیام‌ها</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="header-login d-none d-md-block">
+                    <div class="notification-box dropdown">
+                        {% if request.user.is_authenticated %}
+
+                            <a href="" class="btn login-btn" type="button" id="dropdownMenuButton"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ request.user.image.url }}" alt="">
+                            </a>
+
+
+                            <div class="dropdown-menu account-menu-items custom-bg"
+                                 aria-labelledby="dropdownMenuButton">
+                                {% if is_teacher == True %}
+                                    <a class="" href="{% url "AdminPanel_app:admin_panel" %}">پنل مدیریت</a>
+                                {% endif %}
+                                <a class="" href="{% url "Acount_app:profile" %}"> پروفایل</a>
+                                <a class="" href="{% url "favorite:favorite" %}"> مورد علاقه ها</a>
+                                <a class="" href="{% url "Acount_app:Logout" %}"> خروج</a>
+
+                            </div>
+
+
+
+
+
+
+
+                        {% else %}
+
+                            <a href="{% url "Acount_app:profile" %}" class="btn account-btn" type="button"
+                               id="dropdownMenuButton"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="prepend-icon ml-1">
+                                    <i class="fa fa-user-circle"></i>
+                                </span> <span>حساب کاربری </span>
+                            </a>
+
+
+                            <div class="dropdown-menu account-menu-items custom-bg"
+                                 aria-labelledby="dropdownMenuButton">
+                                <a class="" href="{% url "Acount_app:Login" %}"> <i class=" fa fa-account"></i>
+                                    ورود</a>
+                                <a class="" href="{% url "Acount_app:Register" %}"> ثبت نام</a>
+                            </div>
+
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+
+            <nav class="nav-menu p-0 m-0 d-flex d-sm-flex d-md-none d-lg-none">
+
+                {% for c in category %}
+                    <li id="" class="mx-3"><a class="nav-menu-item-mob">{{ c.name }}
+                        <i class="fa fa-chevron-left chev-icon pr-1"></i>
+                    </a>
+                        <ul class="sub-menu-mob">
+                            <a href="">جاوا</a>
+                            <a href="">پایتون </a>
+                            <a href="">آیتم</a>
+                            <a href=""> آیتم</a>
+                            <a href="">آیتم</a>
+                            <a href="">آیتم</a>
+                            <a href="">5آیتم</a>
+                        </ul>
+                    </li>
+                {% endfor %}
+
+
+            </nav>
+
+        </div>
+
+
+        <section
+                class="nav-header-box-mob d-flex d-sm-flex d-md-none  align-items-center justify-content-between d-md-none d-lg-none position-fixed">
+
+            <div class="hamburger-icon">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="logo">
+                <a href="index.html"><img src="{% static "assets/image/logo.png" %}" class="logo-img img-fluid" alt=""/></a>
+            </div>
+
+            <div class="d-flex align-items-center">
+
+
+                <div class="header-account">
+                    <div class="notification-box dropdown">
+                        <a href="" class="btn login-btn" type="button" id="dropdownMenuButton"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static "assets/image/sutdent-prof.png" %}" alt="">
+                        </a>
+                        <div class="dropdown-menu account-menu-items custom-bg"
+                             aria-labelledby="dropdownMenuButton">
+                            <a class="" href="{% url "Acount_app:Login" %}"> <i class=" fa fa-account"></i>
+                                ورود</a>
+                            <a class="" href="register.html"> ثبت نام</a>
+                            <a class="" href="user-panel.html"> پروفایل</a>
+                            <a class="" href="#"> مورد علاقه ها</a>
+                            <a class="" href="#"> خروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+</header>

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>هدر صفحه پروفایل کاربر :: دریافت شده از وب روبیک</title>
+    <!-- Custom stylesheet -->
+    <link type="text/css" rel="stylesheet" href="{% static "Acount_app/css/style.css" %}"/>
+</head>
+
+{% include "include/head.html" %}
+
+
+<body>
+
+<header>
+    {% include "include/header.html" %}
+    <figure class="profile-banner">
+        <img src="{% static "Acount_app/pics/300.jfif" %}" alt="Profile banner"/>
+    </figure>
+    <figure class="profile-picture" style="background-image: url('{{ object.user.image.url }}')">
+    </figure>
+    <div class="profile-stats">
+        <ul>
+            <li>{{ object.video_tutorial.all.count }}<span>پروژه</span></li>
+            <li>{{ object.followers.all.count }}<span>دنبال کننده</span></li>
+
+        </ul>
+            {% if request.user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {% if request.user.is_authenticated %}
+                {% if follow == False %}
+                    <button class="follow btn btn-primary">دنبال کردن</button>
+                {% else %}
+                    <button class="follow btn btn-danger">آنفالو</button>
+                {% endif %}
+                {% endif %}
+
+
+                </form>
+            {% else %}
+
+                <button class="follow btn btn-primary" onclick="alert_login()">دنبال کردن</button>
+            {% endif %}
+
+    </div>
+    <h1>{{ object.user.full_name }}</h1>
+
+</header>
+
+<script type="text/javascript" src="{% static "Acount_app/js/scripts.js" %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    function alert_login() {
+        Swal.fire({
+            icon: 'error',
+            title: 'خطا!',
+            text: 'ابتدا وارد حساب کاربری خود شوید!'
+        })
+    }
+</script>
+
+</body>
+</html>

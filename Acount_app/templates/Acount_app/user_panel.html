@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+
+{% block content %}
+    <main>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-9 col-md-8 col-lg-8">
+
+
+
+
+                        {% if is_teacher == True %}
+                            <a href="{% url "AdminPanel_app:admin_panel" %}" class="btn account-btn">
+                                <span class="prepend-icon ml-1">
+                                    <i class="fa fa-user-circle"></i>
+                                </span> <span>ورود به پنل مدیریت</span>
+                            </a>
+                            {% else %}
+
+                            <a href="{% url "Acount_app:create_teacher" %}" class="btn account-btn">
+                                <span class="prepend-icon ml-1">
+                                    <i class="fa fa-user-circle"></i>
+                                </span> <span>درخواست مدرس شدن</span>
+                        </a>
+
+                        {% endif %}
+                        <hr>
+
+                        <div class="p-3 custom-bg user-details user-item my-2">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <p class="">نام و نام خانوادگی:</p>
+                                    <h6 class=" font-weight-bold">{{ request.user.full_name }}</h6>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="">پست الکترونیک:</p>
+                                    <h6 class=" font-weight-bold">{{ request.user.email }}</h6>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="">شماره تلفن همراه:</p>
+                                    <h6 class=" font-weight-bold">{{ request.user.phone_number }}</h6>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="">نام کاربری:</p>
+                                    <h6 class=" font-weight-bold">{{ request.user.username }}</h6>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <a class="" href="{% url "Acount_app:profile_edit" %}">
+                                            <i class="fa fa-edit"></i>
+                                            ویرایش اطلاعات شخصی
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+
+
+    </main>
+
+
+{% endblock %}
+</body>
+
+</html>

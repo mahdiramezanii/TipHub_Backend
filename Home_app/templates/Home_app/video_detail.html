@@ -1,0 +1,336 @@
+{% load static %}
+{% load jalali_tags %}
+<html lang="en">
+{% include "include/head.html" %}
+
+<body>
+
+<!-- top-header -->
+<div class="shadow position-fixed w-100 h-100 d-md-none d-lg-none"></div>
+<!-- top-header -->
+{% include "include/header.html" %}
+
+{% include "include/navbar.html" %}
+
+<main>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div>
+                        <!-- video -->
+                        <div class="video-player-box">
+                            <div class="video-icon">
+                                <div class="btn video-btn" onclick="playvideo()" id="videobtn">
+                                    <img src="{% static "assets/image/play-video-btn.png" %}" alt="">
+                                </div>
+                            </div>
+                            <div class="video">
+                                <video width="100%" id="myVideo" autoplay>
+                                    <source src="{{ object.video.url }}" type="video/mp4">
+                                </video>
+                                <img src="{{ object.video_cover.url }}" width="100%" height="100%"
+                                     class="position-absolute video-poster" alt="">
+
+                                <div class="video-overlay"></div>
+                                <div class="video-description px-2 text-white">
+
+                                    <p> {{ object.video_time }} دقیقه</p>
+                                </div>
+                                <h5 class="close-btn" onclick="stopPlayer()">X</h5>
+                            </div>
+                        </div>
+                        <!-- end video -->
+                        <!-- title -->
+                        <h3 class="video-title my-3">{{ object.titel }}
+                        </h3>
+                        <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                            <p class="color78">{{ object.created | timesince }} پیش </p>
+                            <div class="d-flex align-items-center view-like">
+                                <div class="mx-3">
+                                    <span>{{ object.view }}</span>
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                                <div>
+                                    <span id="count">{{ object.favorite.all.count }}</span>
+
+                                    {% if request.user.is_authenticated %}
+
+                                        {% if is_like == True %}
+
+                                            <a href="{% url "Home:favorite" object.slug %}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                </svg>
+                                            </a>
+
+                                        {% else %}
+                                            <a href="{% url "Home:favorite" object.slug %}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+
+
+                                    {% else %}
+
+                                        <button href="" onclick="alert_login()">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                            </svg>
+                                        </button>
+
+                                    {% endif %}
+
+                                    <!-- <i class="fa fa-heart liked" type='button' aria-hidden="true" ></i> -->
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- description -->
+                        <div class="border-bottom pb-3">
+                            <h4 class="my-3">درباره فیلم</h4>
+                            <p class="color78">{{ object.discription }}</p>
+
+                            <div class="labels">
+                                <h4 class="my-3">برچسب ها</h4>
+                                <ul class="d-flex align-items-center">
+                                    {% for t in object.tag.all %}
+
+                                        <li><a href="#" title="">#{{ t.name }}</a></li>
+
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end des -->
+
+                        <!-- comments -->
+                        <div>
+
+                            <div class="py-3">
+                                <span>{{ object.comment.all.count }}</span>
+                                <span>نظر</span>
+                            </div>
+
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" id="parent_id" name="parent_id" value="">
+                                <textarea class="w-100 p-2 comment-area" name="body" id="body" cols="30" rows="10"
+
+                                          placeholder="دیدگاه خود را بنویسید"></textarea>
+
+                                {% if request.user.is_authenticated %}
+
+                                    <div class="d-flex align-items-center justify-content-end pt-3">
+                                        <button class="btn custom-btn" onclick="">ارسال نظر</button>
+                                    </div>
+                                {% else %}
+
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <a href="{% url "Acount_app:Login" %}"><strong>نمی توانید نظری ثبت کنید</strong>برای
+                                            ثبت نظر باید وارد شوید</a>
+                                    </div>
+
+                                {% endif %}
+                            </form>
+
+
+
+                            {% for comments in comment %}
+
+                                {% if comments.parent == None %}
+                                    <div class="comment my-3 p-2">
+                                        <div class=" d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <img src="{{ comments.user.image.url }}" alt="student"
+                                                     class="user-profile">
+                                                <p class="user-name pr-2">{{ comments.user.username }}</p>
+                                            </div>
+
+                                            <p class="comment-date-time">{{ comments.created | timesince }} پیش </p>
+                                        </div>
+                                        <p class="px-4 py-2 comment-text text-justify">{{ comments.body }}</p>
+
+                                        <div class="d-flex align-items-center justify-content-end reply" type='button'>
+                                            <i class="fa fa-reply"></i>
+                                            <button class="btn custom-btn" onclick="set_id('{{ comments.id }}')">پاسخ به
+                                                این نظر
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    {% for replay in comments.parent.replay.all %}
+                                        <div class="comment my-3 p-2 comment-child">
+                                            <div class=" d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <img src="{{ replay.user.image.url }}" alt="student"
+                                                         class="user-profile">
+                                                    <p class="user-name pr-2">{{ replay.user.username }}</p>
+                                                </div>
+
+                                                <p class="comment-date-time">{{ replay.created | timesince}}</p>
+                                            </div>
+                                            <p class="px-4 py-2 comment-text text-justify">{{ replay.body }}</p>
+
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+
+
+
+
+                        {% if comment.has_other_pages %}
+                                    <div class="d-flex align-items-center justify-content-center mb-3 pagination">
+                                        {% if comment.has_previous %}
+                                            <a href="?page={{ comment.previous_page_number }}" class="mx-1"><i
+                                                    class="fa fa-chevron-right"></i></a>
+                                        {% endif %}
+                                        {% for i in comment.paginator.page_range %}
+                                            {% if comment.number == i %}
+                                                <a href="?page={{ i }}" class="active mx-1">{{ i }}</a>
+                                            {% else %}
+                                                <a href="?page={{ i }}" class="mx-1">{{ i }}</a>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if comment.has_next %}
+                                            <a href="?page={{ comment.next_page_number }}" class="mx-1"><i
+                                                    class="fa fa-chevron-left"></i></a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+
+
+                        </div>
+                        <!-- end comments -->
+
+                    </div>
+                </div>
+                <!-- main -->
+                <!-- side -->
+                <aside class="col-md-4 ">
+                    <div class="custom-bg p-2 teacher-card">
+                        <div class="border-bottom py-3 text-center">
+                            <h4>درباره استاد</h4>
+                        </div>
+                        <div class="d-flex align-items-center py-3">
+                            <img src="{{ object.teacher.user.image.url }}" alt="student" class="teacher-profile">
+                            <a href="{{ object.teacher.get_absolut_url }}"><p
+                                    class="user-name pr-2">{{ object.teacher.user.full_name }} </p></a>
+                        </div>
+                        <p class="color78 teacher-description py-3">{{ object.teacher.about_me }}</p>
+
+                        <div class="teacher-social-media d-flex align-items-center justify-content-center flex-wrap">
+                            <a href=""> <i class="fa fa-instagram"></i></a>
+                            <a href=""> <i class="fa fa-github"></i></a>
+                            <a href=""> <i class="fa fa-linkedin"></i></a>
+                            <a href=""> <i class="fa fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- end side -->
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+<!-- footer -->
+{% include "include/footer.html" %}
+
+{% include "include/scripts.html" %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+    // video-player
+    const videobtn = document.querySelector('.video-btn');
+    const video = document.querySelector('.video');
+    const videotag = document.querySelector('video')
+    const videoDescription = document.querySelector('.video-description')
+    const closeBtn = document.querySelector('.close-btn')
+    const videoPoster = document.querySelector('.video-poster')
+    const videoOverlay = document.querySelector('.video-overlay')
+
+    function stopPlayer() {
+        videobtn.style.display = "block";
+        closeBtn.style.display = 'none';
+        videoPoster.style.display = 'inline'
+        video.style.zIndex = '-1'
+        videotag.pause()
+        videotag.style.borderRadius = '20px'
+        videoDescription.style.display = 'flex'
+        videotag.controls = false
+        videotag.style.borderRadius = '15px'
+        videoOverlay.style.display = 'block'
+    };
+
+    function playvideo() {
+        videobtn.style.display = "none";
+        video.style.zIndex = '22222'
+        videotag.autoplay = true
+        videotag.play()
+        videotag.style.borderRadius = '20px'
+        videotag.controls = true
+        videoDescription.style.display = 'none'
+        closeBtn.style.display = 'block'
+        videoPoster.style.display = 'none'
+        videoOverlay.style.display = 'none'
+    }
+</script>
+
+<script>
+    function set_id(id) {
+        document.getElementById("parent_id").value = id;
+        window.location.href = "#body"
+    }
+
+    function set0(id) {
+        document.getElementById("parent_id").value = id;
+        window.location.href = "#body"
+    }
+
+    function alert_login() {
+        Swal.fire({
+            icon: 'error',
+            title: 'خطا!',
+            text: 'برای لایک باید وارد حساب کابری خود شوید!'
+        })
+    }
+
+</script>
+
+<script>
+    function like(slug) {
+
+        var count = document.getElementById("count")
+        $.get(`/detail/${slug}`).then(response => {
+            if (response['response'] === "like") {
+                count.innerText = (count.innerText) + 1
+                alert("like");
+            } else {
+                count.innerText = (count.innerText) - 1
+                alert("onlike")
+            }
+        })
+    }
+
+</script>
+
+
+</body>
+
+</html>

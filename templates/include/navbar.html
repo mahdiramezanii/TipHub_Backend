@@ -1,0 +1,15 @@
+{% load static %}
+
+<nav class="nav-menu nav-menu-pc  d-none d-md-flex px-4" id="navbar">
+
+    {% for c in category.all %}
+    <li id="" class="mx-3 menu-item"><a href="" class="nav-menu-item ">{{ c.name }} </a>
+        <ul class="sub-menu">
+            {% for item in c.subcategory.all %}
+            <a href="{% url "Home:category" item.slug %}">{{ item.name }}</a>
+
+                {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</nav>

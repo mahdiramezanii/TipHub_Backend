@@ -1,0 +1,25 @@
+{% load static %}
+
+{% include "include/head.html" %}
+
+<body>
+
+<!-- top-header -->
+<div class="shadow position-fixed w-100 h-100 d-md-none d-lg-none"></div>
+<!-- top-header -->
+{% include "include/header.html" %}
+
+{% include "include/navbar.html" %}
+
+<main>
+
+
+    {% block content %}
+
+
+    {% endblock %}
+
+<!-- footer -->
+    {% include "include/footer.html" %}
+
+   {% include "include/scripts.html" %}

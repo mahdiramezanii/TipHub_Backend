@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+<html lang="en">
+
+{% block content %}
+    <section class="py-5">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-9 col-md-7 col-lg-5">
+                    <div class="custom-bg p-2">
+
+                        <div class="my-3 text-center">ورود به حساب</div>
+                        {% if form.username.errors %}
+                            <div class="my-3 text-center">{{ form.username.errors }}</div>
+
+                        {% endif %}
+                        <form class="" method="post">
+                            {% csrf_token %}
+                            <div class="field">
+                                <i class="fa fa-envelope"></i>
+                                {{ form.username }}
+
+                            </div>
+
+                            <div class="field">
+                                <i class="fa fa-lock"></i>
+                                {{ form.password }}
+                            </div>
+                            <div class="mr-1 d-flex justify-content-between">
+                                <div>
+
+                                    <label class="small">نمایش گذرواژه</label>
+                                </div>
+                                <div>
+                                    <a href="{% url "Acount_app:password_reset" %}" class="small">رمز عبور خود را فراموش کرده اید؟</a>
+                                </div>
+
+                            </div>
+
+                            <div class="my-3">
+                                <button class="btn custom-btn w-100">ورود</button>
+                            </div>
+                            <div class="pb-2 border-bottom">
+                                <span class="small">حساب کاربری ندارید؟</span>
+                                <a href="register.html" class="small">
+                                    عضویت در سایت
+                                </a>
+                            </div>
+                        </form>
+
+
+                        <div class="">
+                            <p class="small text-center my-3">ورود از طریق حساب‌های کاربری دیگر</p>
+                            <div class="">
+
+                                <div class="social-accunt">
+
+                                    <a title="Google" class="" href="{% provider_login_url 'google' %}">
+                                        <img height="24" src="{% static "assets/image/google.svg" %}"
+                                             class="d-block m-auto">
+                                    </a>
+
+                                    <a title="GitHub" class="" href="">
+                                        <img height="24" src="{% static "assets/image/github.svg" %}"
+                                             class="d-block m-auto">
+                                    </a>
+
+                                    <a title="LinkedIn" class="" href="">
+                                        <img height="24" src="{% static "assets/image/linkedin.svg" %}"
+                                             class="d-block m-auto">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+
+{% endblock %}
+</body>
+
+</html>

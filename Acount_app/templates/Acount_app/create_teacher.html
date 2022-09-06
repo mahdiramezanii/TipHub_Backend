@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+
+{% block content %}
+    <main>
+
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-9 col-md-11 col-lg-10">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="user-panel custom-bg">
+                                <div class="user-panel-box">
+
+                                    <div class="user-panel-profile">
+                                        {% if request.user.image %}
+                                            <img src="{{ request.user.image.url }}" alt="">
+                                        {% endif %}
+                                    </div>
+
+
+                                    <div class="form-group change-profile-btn">
+                                        <div class="btn btn-default btn-file">
+                                            <i class="fa fa-file-image-o"></i>روزمه خود را آپلود کنید
+                                            {{ form.resume }}
+                                        </div>
+
+                                    </div>
+
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-user">خود را معرفی کنید</i>
+                                        {{ form.about_me }}
+                                    </div>
+                                    <!-- item -->
+
+                                    <!-- item -->
+
+                                    <!-- item -->
+
+
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3 ">
+                                    <button type="submit" class="btn custom-btn w-50">ارسال درخواست</button>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <!-- footer -->
+{% endblock %}
+</body>
+
+</html>

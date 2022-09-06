@@ -1,0 +1,112 @@
+{% load static %}
+{% load socialaccount %}
+<html lang="en">
+
+{% include "include/head.html" %}
+
+{% include "include/header.html" %}
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-9 col-md-7 col-lg-5">
+                        <div class="custom-bg p-2">
+
+                            <div class="my-3 text-center">عضویت در سایت</div>
+                            <form class="" method="post">
+                                {% csrf_token %}
+                                <div class="my-3 text-center">{{ form.errors }}</div>
+
+                                <div class="field">
+                                    <i class="fa fa-user"></i>
+                                    {{ form.username }}
+                                </div>
+
+                                <div class="field">
+                                    <i class="fa fa-envelope"></i>
+                                    {{ form.email }}
+                                </div>
+
+                                <div class="field">
+                                    <i class="fa fa-lock"></i>
+                                    {{ form.password1 }}
+                                </div>
+
+                                <div class="field">
+                                    <i class="fa fa-lock"></i>
+                                    {{ form.password2 }}
+                                </div>
+                                <div class="mr-1">
+                                    <div>
+                                        <input type="checkbox" class="checkbox-input" tabindex="0">
+                                        <label class="small">نمایش گذرواژه</label>
+                                    </div>
+                                </div>
+
+                                <div class="my-3">
+                                    <button class="btn custom-btn w-100" type="submit">عضویت</button>
+                                </div>
+                                <div class="pb-2 border-bottom">
+                                    <span class="small">حساب کاربری دارید؟</span>
+                                    <a href="register.html" class="small">
+                                        ورود به حساب
+                                    </a>
+                                </div>
+                            </form>
+
+
+                            <div class="">
+                                <p class="small text-center my-3">عضویت از طریق حساب‌های کاربری دیگر</p>
+                                <div class="">
+
+                                    <div class="social-accunt">
+
+                                        <a title="Google" class="" href="{% provider_login_url 'google' %}">
+                                            <img height="24" src="{% static "assets/image/google.svg" %}" class="d-block m-auto">
+                                        </a>
+
+                                        <a title="GitHub" class="" href="">
+                                            <img height="24" src="{% static "assets/image/github.svg" %}" class="d-block m-auto">
+                                        </a>
+
+                                        <a title="LinkedIn" class="" href="">
+                                            <img height="24" src="{% static "assets/image/linkedin.svg" %}" class="d-block m-auto">
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- footer -->
+    {% include "include/footer.html" %}
+
+    {% include "include/scripts.html" %}
+    <script>
+        let checkboxInput = document.querySelector('.checkbox-input')
+        let passwordInput = document.querySelector('.password-input')
+        let isHide = true
+        checkboxInput.addEventListener('click', () => {
+            if (isHide) {
+                passwordInput.type = 'text'
+                isHide = false
+            } else {
+                passwordInput.type = 'password'
+                isHide = true
+            }
+        })
+
+    </script>
+</body>
+
+</html>

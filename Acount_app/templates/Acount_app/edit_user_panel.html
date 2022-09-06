@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+
+{% block content %}
+    <main>
+
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-9 col-md-11 col-lg-10">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="user-panel custom-bg">
+                                <div class="user-panel-box">
+
+                                    <div class="user-panel-profile">
+                                        {% if request.user.image %}
+                                            <img src="{{ request.user.image.url }}" alt="">
+                                        {% endif %}
+                                    </div>
+
+
+                                    <div class="form-group change-profile-btn">
+                                        <div class="btn btn-default btn-file">
+                                            <i class="fa fa-file-image-o"></i>تصویر پروفایل
+                                            {{ form.image }}
+                                        </div>
+
+                                    </div>
+
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-user"></i>
+                                        {{ form.full_name }}
+                                    </div>
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-envelope"></i>
+                                        {{ form.email }}
+                                    </div>
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-phone"></i>
+                                        {{ form.phone_number }}
+                                    </div>
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-user-circle"></i>
+                                        {{ form.username }}
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3 ">
+                                    <button type="submit" class="btn custom-btn w-50">اعمال تغییرات</button>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <!-- footer -->
+{% endblock %}
+</body>
+
+</html>
