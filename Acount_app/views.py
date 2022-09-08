@@ -25,6 +25,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from .mixin import RedirectLogin, CheckLogin
 from Acount_app.forms import CreateTeacherForm
+from django.conf import settings
 
 
 class ProfileUser(CheckLogin, TemplateView):
@@ -69,7 +70,7 @@ class PasswordResetRequest(RedirectLogin, View):
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
+                        send_mail(subject, email,settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect("/password_reset/done/")
@@ -172,7 +173,7 @@ class RegisterView(RedirectLogin, CreateView):
         })
         to_email = form.cleaned_data.get('email')
         email = EmailMessage(
-            mail_subject, message, to=[to_email]
+            mail_subject, message,settings.DEFAULT_FROM_EMAIL, to=[to_email]
         )
         email.send()
         return HttpResponse('لینک فعال سازی برای شما ارسال شد')
