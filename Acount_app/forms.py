@@ -11,28 +11,6 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(attrs={"class": "password-input", "placeholder": "پسورد خود را وارد کنید"}))
 
 
-
-
-    def clean_username(self):
-
-        if User.objects.filter(username=self.cleaned_data.get('username')).exists():
-
-
-            return self.cleaned_data.get("username")
-
-        else:
-            raise ValidationError("نام کاربری اشتباه است")
-
-    def clean_password(self):
-
-        user=authenticate(username=self.cleaned_data.get("username"),password=self.cleaned_data.get("password"))
-
-        if user is not None:
-            return self.cleaned_data.get("password")
-        else:
-            raise ValidationError("پسورد اشتباه است")
-
-
 """class RegisterForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
         "class": "text-input", "placeholder": "نام کاربری خود را وارد کنید"

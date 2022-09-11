@@ -1,17 +1,14 @@
-import requests
-from django.shortcuts import render, redirect
-from django.urls import reverse,reverse_lazy
-from django.contrib.auth import authenticate, login, logout
-from django.views.generic import TemplateView, View, FormView, CreateView, DetailView
+
+from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.views.generic import TemplateView, View, CreateView, DetailView
 from .forms import LoginForm, EditUserForm
 from django.contrib.auth import login, authenticate
 from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
 from .tokens import account_activation_token
-from Acount_app.models import User
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
@@ -119,10 +116,15 @@ class LoginView(RedirectLogin, View):
     def post(self, request):
         form = LoginForm(data=request.POST)
         if form.is_valid():
-            user = User.objects.get(username=form.cleaned_data.get("username"))
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            username=form.cleaned_data.get("username")
+            password=form.cleaned_data.get("password")
+            user=authenticate(username=username,password=password)
+            # user = User.objects.get(username=form.cleaned_data.get("username"))
+            # user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             return redirect("/")
+        else:
+            form.add_error("username","نام کاربری یا پسورد اشتباه است")
 
         return render(request, "Acount_app/login.html", {"form": form})
 
@@ -132,20 +134,7 @@ class LoginView(RedirectLogin, View):
         return render(request, "Acount_app/login.html", {"form": form})
 
 
-"""class RegisterView(FormView):
-    template_name = "Acount_app/register.html"
-    form_class = RegisterForm
-    success_url = reverse_lazy("Home:Home")
 
-    def form_valid(self, form):
-        form = form.cleaned_data
-        username = form.get("username")
-        email = form.get("email")
-        password1 = form.get("password1")
-        user = User.objects.create(username=username, email=email, password=password1)
-        user.set_password(password1)
-        login(self.request, user)
-        return super().form_valid(form)"""
 
 
 class LogoutView(View):
