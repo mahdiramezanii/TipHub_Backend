@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-&x05cak)sjso&1g7=-n+u^4lztz1ua#lofohy^i*1m2d(2z6fa
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -42,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_cleanup',
     'jalali_date',
-    #My_apps
+    'admin_persian',
+    # My_apps
     'Home_app.apps.HomeAppConfig',
     'Acount_app.apps.AcountAppConfig',
     'Tutorial_app.apps.TrainingsAppConfig',
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     'Favorite_app.apps.FavoriteAppConfig',
     'AdminPanel_app.apps.AdminpanelAppConfig',
 
-# Add the following django-allauth apps
+    # Add the following django-allauth apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,7 +57,7 @@ INSTALLED_APPS = [
 ]
 
 JALALI_DATE_DEFAULTS = {
-   'Strftime': {
+    'Strftime': {
         'date': '%y/%m/%d',
         'datetime': '%H:%M:%S _ %y/%m/%d',
     },
@@ -114,7 +113,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TipHub.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -124,7 +122,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -144,7 +141,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -156,21 +152,20 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[
-    path.join(BASE_DIR,"static")
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, "static")
 ]
-MEDIA_URL="/media/"
-MEDIA_ROOT=path.join(BASE_DIR,"media")
+MEDIA_URL = "/media/"
+MEDIA_ROOT = path.join(BASE_DIR, "media")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL="Acount_app.User"
+AUTH_USER_MODEL = "Acount_app.User"
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -181,12 +176,12 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL="/auth/login/google-auth2/"
+LOGIN_URL = "/auth/login/google-auth2/"
 LOGOUT_REDIRECT_URL = '/'
 
 # Additional configuration settings
 SOCIALACCOUNT_QUERY_EMAIL = True
-ACCOUNT_LOGOUT_ON_GET= True
+ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 
@@ -211,5 +206,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_PORT=587
 # EMAIL_HOST_USER="mahdiramazanii.official@gmail.com"
 # EMAIL_HOST_PASSWORD="Mm3381156004"
-
-
