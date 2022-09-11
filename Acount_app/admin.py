@@ -54,7 +54,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('username','special_user')}),
-        ('Permissions', {'fields': ('is_admin','is_teacher')}),
+        ('Permissions', {'fields': ('is_admin','is_teacher','is_active')}),
     )
 
     add_fieldsets = (
@@ -71,7 +71,8 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
+
 @admin.register(Techer)
 class TecherProfile(admin.ModelAdmin):
-    pass
+    list_display = ("user",'slug','is_active')
 

@@ -35,18 +35,18 @@ class MyUserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(
-        verbose_name='email address',
+        verbose_name='ایمیل',
         max_length=255,
         unique=True,
     )
-    username=models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    image = models.FileField(upload_to="user/image", default="defult/index.jpg", blank=True, null=True)
-    is_teacher = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    full_name=models.CharField(max_length=50)
-    special_user=models.DateTimeField(default=timezone.now())
+    username=models.CharField(max_length=100,verbose_name="نام کاربری")
+    phone_number = models.CharField(max_length=15, blank=True, null=True,verbose_name="شماره تلفن")
+    image = models.FileField(upload_to="user/image", default="defult/index.jpg", blank=True, null=True,verbose_name="تصویر پروفایل")
+    is_teacher = models.BooleanField(default=False,verbose_name="مدرس هست یا خیر؟")
+    is_active = models.BooleanField(default=True,verbose_name="کاربر فعال هست یا خیر؟")
+    is_admin = models.BooleanField(default=False,verbose_name="کاربر ادمین هست یا خیر؟")
+    full_name=models.CharField(max_length=50,verbose_name="نام و نام خانوادگی")
+    special_user=models.DateTimeField(default=timezone.now(),verbose_name="کاربر خاص تا زمان:")
 
 
     objects = MyUserManager()
@@ -75,12 +75,12 @@ class User(AbstractBaseUser):
 
 
 class Techer(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="teacher")
-    about_me=models.TextField()
-    followers=models.ManyToManyField(User,related_name="followers",null=True,blank=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="teacher",verbose_name="نام کاربری")
+    about_me=models.TextField(verbose_name="بیوگرافی")
+    followers=models.ManyToManyField(User,related_name="followers",null=True,blank=True,verbose_name="دنبال کننده ها")
     slug=models.SlugField(null=True,blank=True,allow_unicode=True)
-    resume=models.FileField(upload_to="teacher/cv",null=True,blank=True)
-    is_active=models.BooleanField(default=False)
+    resume=models.FileField(upload_to="teacher/cv",null=True,blank=True,verbose_name="رزومه")
+    is_active=models.BooleanField(default=False,verbose_name="کاربر فعال هست یا حیر؟")
 
 
     def save(self,*args,**kwargs ):
