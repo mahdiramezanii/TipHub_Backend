@@ -96,6 +96,10 @@ class AboutUs(ListView):
     template_name = "Home_app/about_us.html"
     model = Techer
 
+    def get_queryset(self):
+        teacher=Techer.objects.filter(is_active=True)
+        return teacher
+
 
 def FavorateView(request,slug):
 
