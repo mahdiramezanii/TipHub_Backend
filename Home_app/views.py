@@ -79,7 +79,7 @@ class Search(View):
     def get(self,request):
         q=request.GET.get("q")
         page=request.GET.get("page")
-        video=VideoTutorial.objects.filter(Q(titel__icontains=q) | Q(discription__icontains=q))
+        video=VideoTutorial.objects.filter(Q(titel__icontains=q) | Q(discription__icontains=q) | Q(teacher__slug__icontains=q))
 
         paginator=Paginator(video,4)
 

@@ -13,7 +13,7 @@
                 </div>
                 <form action="{% url "Home:search" %}" method="get">
                     <div class="nav-search-btn">
-                        <input type="search" name="q" required placeholder="جستجو">
+                        <input type="search" name="q" value="{{ request.GET.q }}" required placeholder="جستجو">
 
                         <button type="submit"><i class="fa fa-search"></i></button>
 

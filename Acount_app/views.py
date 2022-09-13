@@ -121,7 +121,7 @@ class LoginView(RedirectLogin, View):
             user=authenticate(username=username,password=password)
             # user = User.objects.get(username=form.cleaned_data.get("username"))
             # user.backend = 'django.contrib.auth.backends.ModelBackend'
-            login(request, user)
+            login(request, user,backend="Acount_app.authentication.EmailAuthentication")
             return redirect("/")
         else:
             form.add_error("username","نام کاربری یا پسورد اشتباه است")
