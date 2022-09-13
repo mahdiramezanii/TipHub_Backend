@@ -51,7 +51,7 @@
                             </a>
                             <div class="my-3 pb-3 mx-2">
                                 <i class="fa fa-user  ml-1 "></i>
-                                <span>{{ v.video.teacher.user.get_full_name }}</span>
+                                <a href="{{ v.video.teacher.get_absolut_url }}" class="text text-dark"><span>{{ v.video.teacher.user.full_name }}</span></a>
                             </div>
                         </div>
                     </div>

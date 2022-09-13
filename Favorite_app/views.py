@@ -12,4 +12,5 @@ class FavoritView(CheckLogin,ListView):
 
         context["video"]=favorite_video
 
+
         return context
