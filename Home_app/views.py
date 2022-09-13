@@ -64,7 +64,7 @@ def CategoryVideo(request,slug):
     sub=SubCategory.objects.get(slug=slug)
     video=sub.videotutorial
 
-    return render(request,"Home_app/CategoryVideo.html",{"video":video})
+    return render(request,"Home_app/CategoryVideo.html",{"video":video,"category1":sub})
 
 
 

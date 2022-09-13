@@ -5,12 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>هدر صفحه پروفایل کاربر :: دریافت شده از وب روبیک</title>
+
     <!-- Custom stylesheet -->
     <link type="text/css" rel="stylesheet" href="{% static "Acount_app/css/style.css" %}"/>
 </head>
 
 {% include "include/head.html" %}
+{% block titel %}
+    <title>
+           پروفایل {{ object.user.full_name }}
+    </title>
+
+{% endblock %}
+
 
 
 <body>
@@ -28,23 +35,23 @@
             <li>{{ object.followers.all.count }}<span>دنبال کننده</span></li>
 
         </ul>
-            {% if request.user.is_authenticated %}
-        <form method="post">
-            {% csrf_token %}
-            {% if request.user.is_authenticated %}
-                {% if follow == False %}
-                    <button class="follow btn btn-primary">دنبال کردن</button>
-                {% else %}
-                    <button class="follow btn btn-danger">آنفالو</button>
+        {% if request.user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {% if request.user.is_authenticated %}
+                    {% if follow == False %}
+                        <button class="follow btn btn-primary">دنبال کردن</button>
+                    {% else %}
+                        <button class="follow btn btn-danger">آنفالو</button>
+                    {% endif %}
                 {% endif %}
-                {% endif %}
 
 
-                </form>
-            {% else %}
+            </form>
+        {% else %}
 
-                <button class="follow btn btn-primary" onclick="alert_login()">دنبال کردن</button>
-            {% endif %}
+            <button class="follow btn btn-primary" onclick="alert_login()">دنبال کردن</button>
+        {% endif %}
 
     </div>
     <h1>{{ object.user.full_name }}</h1>

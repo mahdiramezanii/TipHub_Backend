@@ -3,6 +3,11 @@
 <html lang="en">
 
 {% block content %}
+    {% block titel %}
+        <title>
+        ناحیه کابری
+        </title>
+    {% endblock %}
     <main>
 
         <section class="py-5">
@@ -11,21 +16,19 @@
                     <div class="col-sm-9 col-md-8 col-lg-8">
 
 
-
-
                         {% if is_teacher == True %}
                             <a href="{% url "AdminPanel_app:admin_panel" %}" class="btn account-btn">
                                 <span class="prepend-icon ml-1">
                                     <i class="fa fa-user-circle"></i>
                                 </span> <span>ورود به پنل مدیریت</span>
                             </a>
-                            {% else %}
+                        {% else %}
 
                             <a href="{% url "Acount_app:create_teacher" %}" class="btn account-btn">
                                 <span class="prepend-icon ml-1">
                                     <i class="fa fa-user-circle"></i>
                                 </span> <span>درخواست مدرس شدن</span>
-                        </a>
+                            </a>
 
                         {% endif %}
                         <hr>

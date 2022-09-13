@@ -1,7 +1,16 @@
+
 {% load static %}
 {% load jalali_tags %}
 <html lang="en">
 {% include "include/head.html" %}
+
+{% block titel %}
+        <title>
+            {{ object.titel }}
+        </title>
+
+    {% endblock %}
+
 
 <body>
 
