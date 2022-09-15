@@ -5,9 +5,9 @@
 {% block content %}
     {% block titel %}
         <title>
-        ویرایش پروفایل
+            ویرایش پروفایل
         </title>
-        {% endblock %}
+    {% endblock %}
     <main>
 
 
@@ -22,18 +22,21 @@
 
                                     <div class="user-panel-profile">
                                         {% if request.user.image %}
-                                            <img src="{{ request.user.image.url }}" alt="">
+
+
+
+                                            <a target="_blank">
+                                                <img src="{{ request.user.image.url }}" alt="{{ request.user.image.name }}">
+                                            {{ form.image }}
+                                            </a>
+
+
+
+
+
                                         {% endif %}
                                     </div>
 
-
-                                    <div class="form-group change-profile-btn">
-                                        <div class="btn btn-default btn-file">
-                                            <i class="fa fa-file-image-o"></i>تصویر پروفایل
-                                            {{ form.image }}
-                                        </div>
-
-                                    </div>
 
                                     <!-- item -->
                                     <div class="user-panel-field">

@@ -67,7 +67,7 @@
                                         {% if n.is_active %}
 
                                             <div class="dropdown-divider"></div>
-                                            <a href="#" class="dropdown-item">
+                                            <a href="{% url "Notification:message" n.id %}" class="dropdown-item">
                                                 <!-- Message Start -->
                                                 <div class="media">
                                                     <img src="{{ n.sender.image.url }}"

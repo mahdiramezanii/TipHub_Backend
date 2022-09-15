@@ -17,8 +17,11 @@
                     <div class="custom-bg p-2">
 
                         <div class="my-3 text-center">ورود به حساب</div>
-                        {% if form.username.errors %}
-                            <div class="my-3 text-center">{{ form.username.errors }}</div>
+                        {% if form.non_field_errors %}
+                            {% for erorr in form.non_field_errors %}
+
+                            <div class="my-3 text-center alert-danger form-control">{{ erorr }}</div>
+                            {% endfor %}
 
                         {% endif %}
                         <form class="" method="post">

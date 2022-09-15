@@ -1,15 +1,14 @@
-
 {% load static %}
 {% load jalali_tags %}
 <html lang="en">
 {% include "include/head.html" %}
 
 {% block titel %}
-        <title>
-            {{ object.titel }}
-        </title>
+    <title>
+        {{ object.titel }}
+    </title>
 
-    {% endblock %}
+{% endblock %}
 
 
 <body>
@@ -130,28 +129,28 @@
                                 <span>نظر</span>
                             </div>
 
+                            {% if request.user.is_authenticated %}
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="parent_id" name="parent_id" value="">
+                                    <textarea class="w-100 p-2 comment-area" name="body" id="body" cols="30" rows="10"
 
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" id="parent_id" name="parent_id" value="">
-                                <textarea class="w-100 p-2 comment-area" name="body" id="body" cols="30" rows="10"
+                                              placeholder="دیدگاه خود را بنویسید"></textarea>
 
-                                          placeholder="دیدگاه خود را بنویسید"></textarea>
 
-                                {% if request.user.is_authenticated %}
 
-                                    <div class="d-flex align-items-center justify-content-end pt-3">
-                                        <button class="btn custom-btn" onclick="">ارسال نظر</button>
-                                    </div>
-                                {% else %}
+                                        <div class="d-flex align-items-center justify-content-end pt-3">
+                                            <button class="btn custom-btn" onclick="">ارسال نظر</button>
+                                        </div>
 
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <a href="{% url "Acount_app:Login" %}"><strong>نمی توانید نظری ثبت کنید</strong>برای
-                                            ثبت نظر باید وارد شوید</a>
-                                    </div>
+                                </form>
+                            {% else %}
 
-                                {% endif %}
-                            </form>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <a href="{% url "Acount_app:Login" %}"><strong>نمی توانید نظری ثبت کنید</strong>برای
+                                        ثبت نظر باید وارد شوید</a>
+                                </div>
+                            {% endif %}
 
 
 
@@ -187,7 +186,7 @@
                                                     <p class="user-name pr-2">{{ replay.user.username }}</p>
                                                 </div>
 
-                                                <p class="comment-date-time">{{ replay.created | timesince}}</p>
+                                                <p class="comment-date-time">{{ replay.created | timesince }}</p>
                                             </div>
                                             <p class="px-4 py-2 comment-text text-justify">{{ replay.body }}</p>
 
@@ -199,26 +198,26 @@
 
 
 
-                        {% if comment.has_other_pages %}
-                                    <div class="d-flex align-items-center justify-content-center mb-3 pagination">
-                                        {% if comment.has_previous %}
-                                            <a href="?page={{ comment.previous_page_number }}" class="mx-1"><i
-                                                    class="fa fa-chevron-right"></i></a>
+                            {% if comment.has_other_pages %}
+                                <div class="d-flex align-items-center justify-content-center mb-3 pagination">
+                                    {% if comment.has_previous %}
+                                        <a href="?page={{ comment.previous_page_number }}" class="mx-1"><i
+                                                class="fa fa-chevron-right"></i></a>
+                                    {% endif %}
+                                    {% for i in comment.paginator.page_range %}
+                                        {% if comment.number == i %}
+                                            <a href="?page={{ i }}" class="active mx-1">{{ i }}</a>
+                                        {% else %}
+                                            <a href="?page={{ i }}" class="mx-1">{{ i }}</a>
                                         {% endif %}
-                                        {% for i in comment.paginator.page_range %}
-                                            {% if comment.number == i %}
-                                                <a href="?page={{ i }}" class="active mx-1">{{ i }}</a>
-                                            {% else %}
-                                                <a href="?page={{ i }}" class="mx-1">{{ i }}</a>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% endfor %}
 
-                                        {% if comment.has_next %}
-                                            <a href="?page={{ comment.next_page_number }}" class="mx-1"><i
-                                                    class="fa fa-chevron-left"></i></a>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
+                                    {% if comment.has_next %}
+                                        <a href="?page={{ comment.next_page_number }}" class="mx-1"><i
+                                                class="fa fa-chevron-left"></i></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
 
 
                         </div>

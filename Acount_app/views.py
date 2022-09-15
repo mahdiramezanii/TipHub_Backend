@@ -119,8 +119,6 @@ class LoginView(RedirectLogin, View):
             username=form.cleaned_data.get("username")
             password=form.cleaned_data.get("password")
             user=authenticate(username=username,password=password)
-            # user = User.objects.get(username=form.cleaned_data.get("username"))
-            # user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user,backend="Acount_app.authentication.EmailAuthentication")
             return redirect("/")
         else:

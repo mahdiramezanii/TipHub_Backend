@@ -7,7 +7,7 @@ class CreateVideoForm(forms.ModelForm):
 
     class Meta:
         model=VideoTutorial
-        exclude=("slug","view")
+        exclude=("slug","view","teacher")
 
 
         widgets={
