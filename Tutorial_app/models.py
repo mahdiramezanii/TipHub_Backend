@@ -51,7 +51,7 @@ class VideoTutorial(models.Model):
     video=models.FileField(upload_to="videototorial/video",verbose_name="ویدیو")
     titel=models.CharField(max_length=100,unique=True,verbose_name="عنوان")
     video_cover=models.FileField(upload_to="videotutorial/iamge",verbose_name="کاور ویدیو")
-    video_time=models.TimeField(verbose_name="ویدیو")
+    video_time=models.CharField(max_length=50,verbose_name="تایم ویدیو")
     created=models.DateTimeField(auto_now_add=True,verbose_name="تاریخ ایجاد")
     view=models.IntegerField(default=0,verbose_name="تعداد بازدید")
     discription=models.TextField(verbose_name="توضیحات ویدیو")

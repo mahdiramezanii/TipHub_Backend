@@ -28,6 +28,9 @@ class CreateVideoForm(forms.ModelForm):
             "special_video": forms.CheckboxInput(attrs={
                 "class": "form-check-label",
             }),
+            "video_time":forms.TextInput(attrs={
+                "placeholder":"تایم ویدیو را وارد کنید"
+            })
         }
 
 
