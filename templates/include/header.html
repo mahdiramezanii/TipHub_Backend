@@ -119,11 +119,6 @@
                             </div>
 
 
-
-
-
-
-
                         {% else %}
 
                             <a href="{% url "Acount_app:profile" %}" class="btn account-btn" type="button"
@@ -151,18 +146,13 @@
 
             <nav class="nav-menu p-0 m-0 d-flex d-sm-flex d-md-none d-lg-none">
 
-                {% for c in category %}
-                    <li id="" class="mx-3"><a class="nav-menu-item-mob">{{ c.name }}
-                        <i class="fa fa-chevron-left chev-icon pr-1"></i>
-                    </a>
-                        <ul class="sub-menu-mob">
-                            <a href="">جاوا</a>
-                            <a href="">پایتون </a>
-                            <a href="">آیتم</a>
-                            <a href=""> آیتم</a>
-                            <a href="">آیتم</a>
-                            <a href="">آیتم</a>
-                            <a href="">5آیتم</a>
+                {% for c in category.all %}
+                    <li id="" class="mx-3 menu-item"><a href="" class="nav-menu-item ">{{ c.name }} </a>
+                        <ul class="sub-menu">
+                            {% for item in c.subcategory.all %}
+                                <a href="{% url "Home:category" item.slug %}">{{ item.name }}</a>
+
+                            {% endfor %}
                         </ul>
                     </li>
                 {% endfor %}
@@ -182,7 +172,8 @@
                 <div class="bar3"></div>
             </div>
             <div class="logo">
-                <a href="index.html"><img src="{% static "assets/image/logo.png" %}" class="logo-img img-fluid" alt=""/></a>
+                <a href="{% url "Home:Home" %}"><img src="{% static "assets/image/logo.png" %}"
+                                                     class="logo-img img-fluid" alt=""/></a>
             </div>
 
             <div class="d-flex align-items-center">
@@ -190,19 +181,45 @@
 
                 <div class="header-account">
                     <div class="notification-box dropdown">
-                        <a href="" class="btn login-btn" type="button" id="dropdownMenuButton"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static "assets/image/sutdent-prof.png" %}" alt="">
-                        </a>
-                        <div class="dropdown-menu account-menu-items custom-bg"
-                             aria-labelledby="dropdownMenuButton">
-                            <a class="" href="{% url "Acount_app:Login" %}"> <i class=" fa fa-account"></i>
-                                ورود</a>
-                            <a class="" href="register.html"> ثبت نام</a>
-                            <a class="" href="user-panel.html"> پروفایل</a>
-                            <a class="" href="#"> مورد علاقه ها</a>
-                            <a class="" href="#"> خروج</a>
-                        </div>
+                        {% if request.user.is_authenticated %}
+
+                            <a href="" class="btn login-btn" type="button" id="dropdownMenuButton"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ request.user.image.url }}" alt="">
+                            </a>
+
+
+                            <div class="dropdown-menu account-menu-items custom-bg"
+                                 aria-labelledby="dropdownMenuButton">
+                                {% if is_teacher == True %}
+                                    <a class="" href="{% url "AdminPanel_app:admin_panel" %}">پنل مدیریت</a>
+                                {% endif %}
+                                <a class="" href="{% url "Acount_app:profile" %}"> پروفایل</a>
+                                <a class="" href="{% url "favorite:favorite" %}"> مورد علاقه ها</a>
+                                <a class="" href="{% url "Acount_app:Logout" %}"> خروج</a>
+
+                            </div>
+
+
+                        {% else %}
+
+                            <a href="{% url "Acount_app:profile" %}" class="btn account-btn" type="button"
+                               id="dropdownMenuButton"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="prepend-icon ml-1">
+                                    <i class="fa fa-user-circle"></i>
+                                </span> <span>حساب کاربری </span>
+                            </a>
+
+
+                            <div class="dropdown-menu account-menu-items custom-bg"
+                                 aria-labelledby="dropdownMenuButton">
+                                <a class="" href="{% url "Acount_app:Login" %}"> <i class=" fa fa-account"></i>
+                                    ورود</a>
+                                <a class="" href="{% url "Acount_app:Register" %}"> ثبت نام</a>
+                            </div>
+
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 from django import forms
-from django.forms import ValidationError
 from Tutorial_app.models import VideoTutorial
-from Acount_app.models import Techer
+
 
 class CreateVideoForm(forms.ModelForm):
 

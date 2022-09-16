@@ -1,5 +1,5 @@
 {% autoescape off %}
-    Hi {{ user.username }},
-    Please click on the link to confirm your registration,http://
+      سلام {{ user.username }},
+    برای فعال سازی حساب خود روی لینک زیر کلیک کنید,http://
     {{ domain }}{% url 'Acount_app:activate' uidb64=uid token=token %}
 {% endautoescape %}

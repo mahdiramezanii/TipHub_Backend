@@ -159,6 +159,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     path.join(BASE_DIR, "static")
 ]
+#STATIC_ROOT=path.join(BASE_DIR,"assets")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = path.join(BASE_DIR, "media")
 # Default primary key field type
@@ -197,12 +198,12 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST="smtp.gmail.com"
-# EMAIL_USE_TLS=True
-# EMAIL_USE_SSL=False
-# EMAIL_PORT=587
-# EMAIL_HOST_USER="mahdiramazanii.official@gmail.com"
-# EMAIL_HOST_PASSWORD="Mm3381156004"
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST="mail.mahdiramazani.ir"
+DEFAULT_FROM_EMAIL = "no-reply@{mahdiramazani.ir}"
+EMAIL_USE_TLS=True
+EMAIL_PORT=465
+EMAIL_HOST_USER="mahdi@mahdiramazani.ir"
+EMAIL_HOST_PASSWORD="Mm3381156004"

@@ -151,7 +151,7 @@ class RegisterView(RedirectLogin, CreateView):
         user.is_active = False
         user.save()
         current_site = get_current_site(self.request)
-        mail_subject = 'Activate your blog account.'
+        mail_subject = "فعال سازی حساب شما در تیپ هاب"
         message = render_to_string('Acount_app/acc_active_email.html', {
             'user': user,
             'domain': current_site.domain,
@@ -160,7 +160,7 @@ class RegisterView(RedirectLogin, CreateView):
         })
         to_email = form.cleaned_data.get('email')
         email = EmailMessage(
-            mail_subject, message,settings.DEFAULT_FROM_EMAIL, to=[to_email]
+            mail_subject, message,settings.DEFAULT_FROM_EMAIL, to=[to_email],fail_silently=False
         )
         email.send()
         return HttpResponse('لینک فعال سازی برای شما ارسال شد')
