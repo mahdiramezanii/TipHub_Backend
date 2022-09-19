@@ -6,7 +6,7 @@
     <li id="" class="mx-3 menu-item"><a href="" class="nav-menu-item ">{{ c.name }} </a>
         <ul class="sub-menu">
             {% for item in c.subcategory.all %}
-            <a href="{% url "Home:category" item.slug %}">{{ item.name }}</a>
+            <a href="{% url "Tutorial:category" item.id %}">{{ item.name }}</a>
 
                 {% endfor %}
         </ul>
