@@ -11,7 +11,7 @@
                                                          class="logo-img img-fluid"
                                                          alt=""/></a>
                 </div>
-                <form action="{% url "Home:search" %}" method="get">
+                <form action="{% url "Tutorial:search" %}" method="get">
                     <div class="nav-search-btn">
                         <input type="search" name="q" value="{{ request.GET.q }}" required placeholder="جستجو">
 
@@ -150,7 +150,7 @@
                     <li id="" class="mx-3 menu-item"><a href="" class="nav-menu-item ">{{ c.name }} </a>
                         <ul class="sub-menu">
                             {% for item in c.subcategory.all %}
-                                <a href="{% url "Home:category" item.slug %}">{{ item.name }}</a>
+                                <a href="{% url "Tutorial:category" item.id %}">{{ item.name }}</a>
 
                             {% endfor %}
                         </ul>
