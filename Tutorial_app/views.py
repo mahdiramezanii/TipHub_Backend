@@ -51,7 +51,7 @@ class DetailVideo(CheckSoecial,DetailView):
 
         else:
             Notification.objects.create(user=video.teacher.user,sender=video, body="یک نظر جدید به ویدیو شما اضافه شد")
-        return redirect(reverse("Tutorial:detail_video",kwargs={"id":pk}))
+        return redirect(reverse("Tutorial:detail_video",kwargs={"pk":pk}))
 
 def CategoryVideo(request,pk):
 

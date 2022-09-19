@@ -62,10 +62,6 @@ class VideoTutorial(models.Model):
     special_video=models.BooleanField(verbose_name="مخصوص اعضای ویژه؟")
 
 
-
-
-
-
     class Meta:
 
         ordering=("-created",)
