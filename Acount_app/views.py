@@ -58,7 +58,7 @@ class PasswordResetRequest(RedirectLogin, View):
                     email_template_name = "Acount_app/password/password_reset_email.txt"
                     c = {
                         "email": user.email,
-                        'domain': '127.0.0.1:8000',
+                        'domain': 'mahdiramazani.ir',
                         'site_name': 'Website',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
@@ -67,7 +67,7 @@ class PasswordResetRequest(RedirectLogin, View):
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email,settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
+                        send_mail(subject, email,settings.DEFAULT_FROM_EMAIL, [user.email])
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect("/password_reset/done/")
@@ -154,13 +154,13 @@ class RegisterView(RedirectLogin, CreateView):
         mail_subject = "فعال سازی حساب شما در تیپ هاب"
         message = render_to_string('Acount_app/acc_active_email.html', {
             'user': user,
-            'domain': current_site.domain,
+            'domain': "mahdiramazani.ir",
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
         to_email = form.cleaned_data.get('email')
         email = EmailMessage(
-            mail_subject, message,settings.DEFAULT_FROM_EMAIL, to=[to_email],fail_silently=False
+            mail_subject, message,settings.DEFAULT_FROM_EMAIL, to=[to_email]
         )
         email.send()
         return HttpResponse('لینک فعال سازی برای شما ارسال شد')

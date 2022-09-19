@@ -6,5 +6,6 @@ urlpatterns = [
     path("", views.HomeView.as_view(), name="Home"),
     path("all_video/", views.AllVideo.as_view(), name="all_video"),
     path("about_us/", views.AboutUs.as_view(), name="about_us"),
+    path("most_view",views.MostViewVideo.as_view(),name="most_view")
 
 ]

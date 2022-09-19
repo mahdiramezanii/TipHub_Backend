@@ -52,7 +52,7 @@
                             </div>
                             <div class="pb-2 border-bottom">
                                 <span class="small">حساب کاربری ندارید؟</span>
-                                <a href="register.html" class="small">
+                                <a href="{% url "Acount_app:Register" %}" class="small">
                                     عضویت در سایت
                                 </a>
                             </div>
@@ -70,7 +70,7 @@
                                              class="d-block m-auto">
                                     </a>
 
-                                    <a title="GitHub" class="" href="">
+                                    <a title="GitHub" class="" href={% provider_login_url 'github' %}>
                                         <img height="24" src="{% static "assets/image/github.svg" %}"
                                              class="d-block m-auto">
                                     </a>

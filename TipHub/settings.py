@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    "allauth.socialaccount.providers.github",
 ]
 
 JALALI_DATE_DEFAULTS = {
@@ -185,6 +186,9 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -201,9 +205,8 @@ SOCIALACCOUNT_PROVIDERS = {
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST="mail.mahdiramazani.ir"
-DEFAULT_FROM_EMAIL = "no-reply@{mahdiramazani.ir}"
+EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
-EMAIL_PORT=465
-EMAIL_HOST_USER="mahdi@mahdiramazani.ir"
-EMAIL_HOST_PASSWORD="Mm3381156004"
+EMAIL_PORT=587
+EMAIL_HOST_USER="tiphub.time@gmail.com"
+EMAIL_HOST_PASSWORD="kvbapuzhyxbvngcw"
