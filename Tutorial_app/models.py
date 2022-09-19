@@ -83,7 +83,7 @@ class VideoTutorial(models.Model):
 
     def get_absulot_url(self):
 
-        return reverse("Tutorial:detail",kwargs={"pk":self.id})
+        return reverse("Home:detail_video",kwargs={"slug":self.slug})
 
     def __str__(self):
         return f"{self.teacher.user.full_name} --> {self.titel}"

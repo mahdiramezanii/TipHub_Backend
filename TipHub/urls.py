@@ -39,7 +39,6 @@ urlpatterns = [
     path("notification/",include("Notification_app.urls")),
     path("favorite/",include("Favorite_app.urls")),
     path("admin_panel/",include("AdminPanel_app.urls")),
-    path("detail/",include("Tutorial_app.urls")),
 
 ]
 
