@@ -57,10 +57,14 @@
                                 </div>
                                 <a href="{{ video.get_absulot_url }}">
                                     <h5 class="video-card-title m-2">{{ video.titel }}</h5>
+                                    {% if video.special_video == True %}
+                                        <span class="m-2 badge badge-primary"> مخصوص اعضای ویژه</span>
+                                    {% endif %}
                                 </a>
                                 <div class="my-3 pb-3 mx-2">
                                     <i class="fa fa-user  ml-1 "></i>
-                                    <span>{{ video.teacher.user.username }}</span>
+                                    <a class="text text-dark"
+                                       href="{{ video.teacher.get_absolut_url }}"><span>{{ video.teacher.user.full_name }}</span></a>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +77,7 @@
                     <div class="d-flex align-items-center justify-content-center mb-3 pagination">
                         {% if object_list.has_previous %}
                             <a href="?page=
+
                                     {{ object_list.previous_page_number }}{% if request.GET %}&q={{ request.GET.q }}{% endif %}"
                                class="mx-1"><i class="fa fa-chevron-right"></i></a>
                         {% endif %}

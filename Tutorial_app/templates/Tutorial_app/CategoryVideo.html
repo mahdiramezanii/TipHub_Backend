@@ -22,51 +22,54 @@
 
                     {% for item in video.all %}
 
-                    <div class="col-md-6 col-lg-4 my-2">
-                        <div class="custom-bg">
-                            <div class="video-card">
-                                <a href="video-detail.html" class="position-relative d-block ">
-                                    <img src="{{ item.video_cover.url }}" alt="" class="img-fluid w-100 h-100">
-                                    <div class="video-play-btn">
-                                        <i class="fa fa-play"></i>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between video-category-time">
-                                        <h6 class="">{{ item.category.all.0 }}</h6>
-                                        <span class="vid-time">{{ item.video_time }}</span>
-                                    </div>
-                                    <div class="video-card-details">
-                                        <div>
-                                            <span>{{ item.view }}</span>
-                                            <i class="fa fa-eye"></i>
+                        <div class="col-md-6 col-lg-4 my-2">
+                            <div class="custom-bg">
+                                <div class="video-card">
+                                    <a href="video-detail.html" class="position-relative d-block ">
+                                        <img src="{{ item.video_cover.url }}" alt="" class="img-fluid w-100 h-100">
+                                        <div class="video-play-btn">
+                                            <i class="fa fa-play"></i>
                                         </div>
-                                        <div>
-                                            <span>{{ item.like }}</span>
-                                            <i class="fa fa-heart"></i>
+                                        <div class="d-flex align-items-center justify-content-between video-category-time">
+                                            <h6 class="">{{ item.category.all.0 }}</h6>
+                                            <span class="vid-time">{{ item.video_time }}</span>
                                         </div>
-                                        <div>
-                                            <span>{{ item.comment.all.count }}</span>
-                                            <i class="fa fa-comment"></i>
+                                        <div class="video-card-details">
+                                            <div>
+                                                <span>{{ item.view }}</span>
+                                                <i class="fa fa-eye"></i>
+                                            </div>
+                                            <div>
+                                                <span>{{ item.like }}</span>
+                                                <i class="fa fa-heart"></i>
+                                            </div>
+                                            <div>
+                                                <span>{{ item.comment.all.count }}</span>
+                                                <i class="fa fa-comment"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="article-overlay"></div>
-                                </a>
+                                        <div class="article-overlay"></div>
+                                    </a>
 
-                            </div>
-                            <a href="{{ item.get_absulot_url }}">
-                                <h5 class="video-card-title m-2">{{ item.titel }}</h5>
-                            </a>
-                            <div class="my-3 pb-3 mx-2">
-                                <i class="fa fa-user  ml-1 "></i>
-                                <span>{{ item.teacher.user.username }}</span>
+                                </div>
+                                <a href="{{ item.get_absulot_url }}">
+                                    <h5 class="video-card-title m-2">{{ item.titel }}</h5>
+                                    {% if item.special_video == True %}
+                                        <span class="m-2 badge badge-primary"> مخصوص اعضای ویژه</span>
+                                    {% endif %}
+                                </a>
+                                <div class="my-3 pb-3 mx-2">
+                                    <i class="fa fa-user  ml-1 "></i>
+                                    <a class="text text-dark"
+                                       href="{{ item.teacher.get_absolut_url }}"><span>{{ item.teacher.user.full_name }}</span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                   {% endfor %}
+                    {% endfor %}
 
 
                 </div>
-
 
 
                 <div class="d-flex align-items-center justify-content-center mb-3 pagination">
@@ -85,7 +88,7 @@
     </main>
 
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 

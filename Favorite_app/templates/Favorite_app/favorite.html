@@ -5,22 +5,22 @@
 {% block content %}
     {% block titel %}
         <title>
-        مورد علاقه ها
+            مورد علاقه ها
         </title>
 
-        {% endblock %}
+    {% endblock %}
 
-        <section class="py-5">
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h2 class="title-section">ویدیو های مورد علاقه</h2>
-                    <a href="{% url "Home:all_video" %}" class="btn custom-btn">
-                        نمایش همه
-                    </a>
-                </div>
-                <div class="row">
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h2 class="title-section">ویدیو های مورد علاقه</h2>
+                <a href="{% url "Home:all_video" %}" class="btn custom-btn">
+                    نمایش همه
+                </a>
+            </div>
+            <div class="row">
 
-                    {% for v in video %}
+                {% for v in video %}
 
                     <div class="col-md-6 col-lg-4 my-2">
                         <div class="custom-bg">
@@ -54,19 +54,23 @@
                             </div>
                             <a href="{{ v.video.get_absulot_url }}">
                                 <h5 class="video-card-title m-2"> {{ v.video.titel }}</h5>
+                                {% if v.video.special_video == True %}
+                                    <span class="m-2 badge badge-primary"> مخصوص اعضای ویژه</span>
+                                {% endif %}
                             </a>
                             <div class="my-3 pb-3 mx-2">
                                 <i class="fa fa-user  ml-1 "></i>
-                                <a href="{{ v.video.teacher.get_absolut_url }}" class="text text-dark"><span>{{ v.video.teacher.user.full_name }}</span></a>
+                                <a href="{{ v.video.teacher.get_absolut_url }}"
+                                   class="text text-dark"><span>{{ v.video.teacher.user.full_name }}</span></a>
                             </div>
                         </div>
                     </div>
 
-                    {% endfor %}
+                {% endfor %}
 
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
 
@@ -75,7 +79,7 @@
     </main>
 
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 
