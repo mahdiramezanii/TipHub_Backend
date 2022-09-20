@@ -40,15 +40,13 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{% url "Home:Home" %}" class="nav-link">خانه</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">تماس</a>
-            </li>
+
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
+        <form class="form-inline ml-3" action="{% url "Tutorial:search" %}">
             <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search">
+                <input class="form-control form-control-navbar" type="search" name="q" required placeholder="جستجو" aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-navbar" type="submit">
                         <i class="fa fa-search"></i>
@@ -60,93 +58,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav mr-auto">
             <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fa fa-comments-o"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="{% static "AdminPanel_app/dist/img/user1-128x128.jpg" %}" alt="User Avatar"
-                                 class="img-size-50 ml-3 img-circle">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    حسام موسوی
-                                    <span class="float-left text-sm text-danger"><i class="fa fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">با من تماس بگیر لطفا...</p>
-                                <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 ساعت قبل</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="{% static "AdminPanel_app/dist/img/user8-128x128.jpg" %}" alt="User Avatar"
-                                 class="img-size-50 img-circle ml-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    پیمان احمدی
-                                    <span class="float-left text-sm text-muted"><i class="fa fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">من پیامتو دریافت کردم</p>
-                                <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 ساعت قبل</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="{% static "AdminPanel_app/dist/img/user3-128x128.jpg" %}" alt="User Avatar"
-                                 class="img-size-50 img-circle ml-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    سارا وکیلی
-                                    <span class="float-left text-sm text-warning"><i class="fa fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">پروژه اتون عالی بود مرسی واقعا</p>
-                                <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i>4 ساعت قبل</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">مشاهده همه پیام‌ها</a>
-                </div>
-            </li>
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-                    <span class="dropdown-item dropdown-header">15 نوتیفیکیشن</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-envelope ml-2"></i> 4 پیام جدید
-                        <span class="float-left text-muted text-sm">3 دقیقه</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-users ml-2"></i> 8 درخواست دوستی
-                        <span class="float-left text-muted text-sm">12 ساعت</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-file ml-2"></i> 3 گزارش جدید
-                        <span class="float-left text-muted text-sm">2 روز</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">مشاهده همه نوتیفیکیشن</a>
-                </div>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                         class="fa fa-th-large"></i></a>
@@ -239,12 +151,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>ارسال ایمیل</h1>
+                        <h1>یجاد ویدیو</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
-                            <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                            <li class="breadcrumb-item active">ارسال ایمیل</li>
+                            <li class="breadcrumb-item"><a href="{% url "Home:Home" %}">خانه</a></li>
+                            <li class="breadcrumb-item active">ایجاد ویدیو</li>
                         </ol>
                     </div>
                 </div>
@@ -255,62 +167,14 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="mailbox.html" class="btn btn-primary btn-block mb-3">برگشت به اینباکس</a>
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">پوشه‌ها</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item active">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-inbox"></i> اینباکس
-                                            <span class="badge bg-primary float-left">12</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-envelope-o"></i> ارسال شده
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-file-text-o"></i> پیش نویس
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-filter"></i> هرزنامه
-                                            <span class="badge bg-warning float-left">65</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-trash-o"></i> سطل زباله
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /. box -->
-
-                    </div>
                     <!-- /.col -->
                     <div class="col-md-9">
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">ایجاد ایمیل جدید</h3>
+                                    <h3 class="card-title">ایجاد ویدیو جدید</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -371,15 +235,13 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <div class="float-left">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>
-                                            پیش‌نویس
-                                        </button>
+
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i>
                                             ارسال
                                         </button>
                                     </div>
-                                    <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> لغو
-                                    </button>
+                                    <a href="{% url "AdminPanel_app:admin_panel" %}" class="btn btn-default"><i class="fa fa-times"></i> لغو
+                                    </a>
                                 </div>
                                 <!-- /.card-footer -->
                             </div>
@@ -394,9 +256,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
-    </footer>
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
