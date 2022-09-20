@@ -95,7 +95,7 @@ class Techer(models.Model):
 
     def get_absolut_url(self):
 
-        return reverse("Acount_app:profile_teacher", kwargs={"pk": self.id, "slug": self.slug})
+        return reverse("Acount_app:profile_teacher", kwargs={"pk": self.id})
 
     def teacher_active(self):
 

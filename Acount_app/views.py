@@ -197,7 +197,7 @@ class ProfileTeacher(DetailView):
             context["follow"] = False
         return context
 
-    def post(self, request, slug,pk):
+    def post(self, request,pk):
         user=request.user
         teacher = Techer.objects.get(pk=pk)
 
@@ -209,7 +209,7 @@ class ProfileTeacher(DetailView):
 
             teacher.followers.add(request.user)
 
-        return redirect(reverse_lazy("Acount_app:profile_teacher",kwargs={"pk":pk,"slug":slug}))
+        return redirect(reverse_lazy("Acount_app:profile_teacher",kwargs={"pk":pk}))
 
 
 class CreateTeacher(View):

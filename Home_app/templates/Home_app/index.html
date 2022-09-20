@@ -123,9 +123,10 @@
                                 {% endif %}
                         </a>
                         <div class="my-3 pb-3 mx-2">
-                            <i class="fa fa-user  ml-1 "></i>
-                            <span>{{ video.teacher.user.full_name }}</span>
-                        </div>
+                                <i class="fa fa-user  ml-1 "></i>
+                                <a class="text text-dark"
+                                   href="{{ video.teacher.get_absolut_url }}"><span>{{ video.teacher.user.full_name }}</span></a>
+                            </div>
                     </div>
                 </div>
 
