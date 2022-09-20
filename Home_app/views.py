@@ -10,14 +10,14 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data()
-        most_view_video = VideoTutorial.objects.filter(view__gt=50)[:6]
+        most_view_video = VideoTutorial.objects.filter(view__gt=50,is_active=True)[:6]
         context["most_view"] = most_view_video
         return context
 
 class MostViewVideo(ListView):
     model = VideoTutorial
     template_name = "Home_app/all_videos.html"
-    queryset = VideoTutorial.objects.filter(view__gt=50)
+    queryset = VideoTutorial.objects.filter(view__gt=50,is_active=True)
     paginate_by = 2
 
 
