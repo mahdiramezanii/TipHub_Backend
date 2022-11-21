@@ -1,8 +1,8 @@
 <div align=center>
     
-    <img src="https://s6.uupload.ir/files/bandicam_2022-11-21_14-52-49-617_qozk.jpg" alt="Logo TipHub" width="950">
+    <img src="https://s6.uupload.ir/files/bandicam_2022-11-21_14-52-49-617_qozk.jpg" algin="center" width="950">
     <h1 align=center>Tiphub</h1>
-    <h3 align=center>I'm Tiphub, a Video Sharing Service for Developers</h3>
+    <h3 align=center>I'm Tiphub, a Video Sharing Service for Developers</h3>ظ
 </div>
 <hr>
 <div align=center>
